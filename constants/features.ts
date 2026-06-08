@@ -10,7 +10,7 @@ export const FEATURES: FeatureType[] = [
     {
         icon: Rabbit,
         title: "Lightning Fast",
-        description: "DipDrop extracts prices in seconds, handling JavaScript and dynamic content",
+        description: "DipDrop extracts prices in seconds, handling JS and dynamic content",
     },
     {
         icon: Shield,
