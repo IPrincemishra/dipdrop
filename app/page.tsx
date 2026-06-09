@@ -1,4 +1,5 @@
 import AddProductForm from "@/components/AddProductForm";
+import AuthButton from "@/components/AuthButton";
 import { Button } from "@/components/ui/button";
 import { FEATURES } from "@/constants/features";
 import { Heart, HeartPlus, Icon, LogIn } from "lucide-react";
@@ -24,13 +25,7 @@ export default function home() {
             />
           </div>
           {/* btn */}
-          <Button
-            variant={"default"}
-            size={"sm"}
-            className="bg-[#ff5622e0] hover:bg-[#ff5622] gap-2 cursor-pointer">
-            <LogIn className="w-4 h-4" />
-            Sign In
-          </Button>
+          <AuthButton user={user} />
         </div>
       </header>
       <section className="py-20 px-4">
