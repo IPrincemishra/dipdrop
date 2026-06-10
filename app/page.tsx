@@ -1,15 +1,17 @@
 import AddProductForm from "@/components/AddProductForm";
 import AuthButton from "@/components/AuthButton";
-import { Button } from "@/components/ui/button";
 import { FEATURES } from "@/constants/features";
-import { Heart, HeartPlus, Icon, LogIn } from "lucide-react";
+import { createClient } from "@/utils/supabase/server";
+import { TrendingDown } from "lucide-react";
 import Image from "next/image";
 
-export default function home() {
+export default async function home() {
 
-  const user = null
+  const supabase = await createClient()
 
-  const products = []
+  const { data: { user } } = await supabase.auth.getUser()
+
+  const products: number[] = []
 
   return (
     <main className="min-h-screen bg-linear-to-br from-orange-100/50 via-white to-orange-100/50">
@@ -32,7 +34,7 @@ export default function home() {
         <div className="max-w-7xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 bg-orange-100 text-orange-700 px-6 py-2n rounded-full text-sm font-medium">Made with 🧡 by Prince</div>
           <h2 className="text-5xl font-bold text-gray-900 mb-4 tracking-tight">Never Miss a Price Drop</h2>
-          <p className="text-xl text-gray-600 mb-12 max-w-2xl mx-auto">Track prices from any e-commerce site. Get insatant alerts when prices drop. Save money effortlessly</p>
+          <p className="text-xl text-gray-600 mb-12 max-w-2xl mx-auto">Track prices from any e-commerce site. Get instant alerts when prices drop. Save money effortlessly</p>
 
           {/* Add */}
           <AddProductForm user={user} />
@@ -60,6 +62,21 @@ export default function home() {
           }
         </div>
       </section>
+      {
+        user && products.length === 0 && (
+          <section className="max-w-2xl mx-auto px-4 pb-20 text-center">
+            <div className="bg-white p-12 rounded-xl border-2 border-dashed border-gray-300">
+              <TrendingDown className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                No Products yet
+              </h3>
+              <p className="text-gray-600">
+                Add your first product above to start tracking prices!
+              </p>
+            </div>
+          </section>
+        )
+      }
     </main>
   )
 }
