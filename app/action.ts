@@ -136,7 +136,7 @@ export async function getPriceHistory(productId) {
         const supabase = await createClient()
 
         const { data, error } = await supabase
-            .from("products")
+            .from("price_history")
             .select("*")
             .eq("product_id", productId)
             .order("checked_at", { ascending: true })
